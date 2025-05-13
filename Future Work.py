@@ -12,7 +12,8 @@ http://books.toscrape.com/catalogue/category/books/travel_2/index.html
 
 status: done
 file path: "D:\Backend\web scrapping\In Django\e-commrace"
-filename: "e_commrace_selenium_json.py"
+filename: "e_commrace_selenium_json.py"  # using selenium
+filename: "e-commrace-crawl4ai"  # using crawl4ai
 """
 
 # Open Food Facts
