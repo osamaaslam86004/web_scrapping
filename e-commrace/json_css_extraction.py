@@ -1,8 +1,17 @@
 import asyncio
-import base64
+import json
 
 from crawl4ai import AsyncWebCrawler, BrowserConfig, CacheMode, CrawlerRunConfig
 from crawl4ai.extraction_strategy import JsonCssExtractionStrategy
+
+# Map rating words to numbers
+RATING_MAP = {
+    "One": 1,
+    "Two": 2,
+    "Three": 3,
+    "Four": 4,
+    "Five": 5,
+}
 
 schema = {
     "name": "Books Extraction",
@@ -15,9 +24,9 @@ schema = {
             "type": "text",
         },
         {
-            "name": "rating",
+            "name": "star_rating_class",
+            "type": "attribute",
             "selector": "p.star-rating",
-            "type": "attr",
             "attribute": "class",
         },
         {"name": "stock", "selector": "p.instock", "type": "text"},
@@ -25,18 +34,18 @@ schema = {
 }
 
 
+def parse_star_rating(class_list):
+    # Loop over the class list and find a match
+    for cls in class_list:
+        if cls in RATING_MAP:
+            return RATING_MAP[cls]
+    return 0  # default if no match found
+
+
 extraction_strategy = JsonCssExtractionStrategy(schema, verbose=True)
 
 
 async def main():
-    """
-    1. The code extract Tilte, Stock and Price of a Product
-    but not 'Star Rating'
-
-    2. Use e_commrace_selenium_json.py to extract all details including
-    'Star Rating' in json format
-    """
-
     browser_cfg = BrowserConfig(
         headless=True,
         viewport_width=1280,
@@ -48,12 +57,14 @@ async def main():
         cache_mode=CacheMode.BYPASS,
         exclude_external_links=True,
         extraction_strategy=extraction_strategy,
-        wait_for="css:article.product_pod",  # Wait for product elements
-        screenshot=True,
-        scan_full_page=True,
+        wait_for="css:article.product_pod",
+        delay_before_return_html=2.0,
+        page_timeout=60000,
+        magic=True,
+        simulate_user=True,
+        override_navigator=True,
     )
 
-    # Travel category URL
     url = "http://books.toscrape.com/catalogue/category/books/travel_2/index.html"
 
     async with AsyncWebCrawler(config=browser_cfg) as crawler:
@@ -63,31 +74,23 @@ async def main():
             print("Crawl failed:", result.error_message)
             return
 
-        # Parse the extracted JSON
         result = result.extracted_content
         if result is not None:
-            print("Raw extracted content:")
+            print("Raw extracted content:", result)
+            result = json.loads(result)
+
+            # Convert class to numeric star rating
+            for item in result:
+                class_str = item.get("star_rating_class", "")
+                item["star_rating"] = parse_star_rating(class_str)
+                item.pop("star_rating_class", None)
+
             print(result)
-
-        # Debug: Screenshot
-        screenshot_bytes = None
-        if isinstance(result.screenshot, str):
-            screenshot_bytes = base64.b64decode(result.screenshot)
-        else:
-            screenshot_bytes = result.screenshot
-
-        if screenshot_bytes:
-            with open("screenshot.png", "wb") as f:
-                f.write(screenshot_bytes)
-            print("Screenshot saved as screenshot.png")
 
 
 if __name__ == "__main__":
     """
-    1. The code extract Tilte, Stock and Price of a Product
-    but not 'Star Rating'
-
-    2. Use e_commrace_selenium_json.py to extract all details including
-    'Star Rating' in json format
+    1. The code extract Tilte, Stock and Price, Star Rating count of a Product'
+    2. Use e_commrace_selenium_json.py to extract all details using selenium
     """
     asyncio.run(main())

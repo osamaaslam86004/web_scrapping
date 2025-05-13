@@ -9,6 +9,10 @@ file path: "D:\Backend\web scrapping\In Django\markdown"
 # E-Commrace Website built for web-scrapping
 """
 http://books.toscrape.com/catalogue/category/books/travel_2/index.html
+
+status: done
+file path: "D:\Backend\web scrapping\In Django\e-commrace"
+filename: "e_commrace_selenium_json.py"
 """
 
 # Open Food Facts
@@ -25,6 +29,10 @@ What: Multiple test e-commerce sites with varying complexity.
 Practice: Pagination, product details, categories, login forms.
 
 https://webscraper.io/test-sites
+
+status: done
+file path: "D:\Backend\web scrapping\In Django\e-commarce
+filename: json_extraction_with_pagination_with_image_star_rating.py
 """
 
 # Wikipedia
