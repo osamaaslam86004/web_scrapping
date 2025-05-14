@@ -1,68 +1,12 @@
-# import asyncio
-# import os
-# from urllib.parse import urlencode
-
-# import aiohttp
-# from loguru import logger
-# from my_crawler.google_books import GoogleBooksCrawler
-
-# # Setup loguru
-# logger.add("error.log", level="ERROR", format="{time} [{level}] {message}")
-# logger.remove()  # Remove default stderr logger
-# logger.add(lambda msg: print(msg, end=""), level="INFO", format="{message}")
-
-# # Constants
-# API_KEY = open("api_key.txt").read().strip()
-# QUERIES = ["python", "machine learning", "data science"]
-# MAX_RESULTS = 10
-# OUTPUT_DIR = "output"
-# MAX_RETRIES = 3
-# TIMEOUT = 10
-
-# os.makedirs(OUTPUT_DIR, exist_ok=True)
-
-
-# async def fetch_with_retries(crawler, query, attempt=1):
-#     params = {
-#         "q": query,
-#         "startIndex": 0,
-#         "maxResults": MAX_RESULTS,
-#         "printType": "books",
-#         "key": API_KEY,
-#     }
-#     url = f"https://www.googleapis.com/books/v1/volumes?{urlencode(params)}"
-
-#     try:
-#         json_str = await asyncio.wait_for(crawler.run(url=url), timeout=TIMEOUT)
-#         return json_str
-#     except (aiohttp.ClientError, asyncio.TimeoutError, Exception) as e:
-#         logger.error(f"Error on query '{query}' (Attempt {attempt}): {e}")
-#         if attempt < MAX_RETRIES:
-#             await asyncio.sleep(2**attempt)  # exponential backoff
-#             return await fetch_with_retries(crawler, query, attempt + 1)
-#         else:
-#             logger.error(
-#                 f"❌ Failed to fetch data for '{query}' after {MAX_RETRIES} attempts."
-#             )
-#             return None
-
-
-# async def main():
-#     crawler = GoogleBooksCrawler()
-
-#     for query in QUERIES:
-#         json_str = await fetch_with_retries(crawler, query)
-#         if json_str:
-#             filename = f"{query.replace(' ', '_')}.json"
-#             filepath = os.path.join(OUTPUT_DIR, filename)
-#             with open(filepath, "w", encoding="utf-8") as f:
-#                 f.write(json_str)
-#             logger.info(f"✅ Saved '{query}' results to {filepath}")
-
-
-# if __name__ == "__main__":
-#     asyncio.run(main())
-
+"""
+About Google Books Spider
+1. Easily scalable with multiple inputs
+2. Built-in concurrency support
+3. Modular spiders — easy to maintain and extend
+4. Integrated logging system
+5. Large-scale scraping, automation
+6. retries
+"""
 
 import asyncio
 import os
@@ -80,13 +24,11 @@ logger.add(lambda msg: print(msg, end=""), level="INFO", format="{message}")
 
 
 # Constants (Configuration variables)
-API_KEY = (
-    open("api_key.txt").read().strip()
-)  # Reads and stores the Google Books API key from "api_key.txt". Leading/trailing whitespace is removed.
-OUTPUT_DIR = "output"  # Directory where the output JSON files will be saved.
-MAX_RESULTS = 10  # Number of results to fetch per query.
-MAX_RETRIES = 3  # Maximum number of retry attempts for failed requests.
-TIMEOUT = 10  # Timeout in seconds for each API request.
+API_KEY = open("api_key.txt").read().strip()
+OUTPUT_DIR = "output"
+MAX_RESULTS = 10
+MAX_RETRIES = 3
+TIMEOUT = 10
 CONCURRENT_LIMIT = 10  # Limits the number of concurrent API requests to avoid rate limiting or overwhelming the server.
 
 os.makedirs(
