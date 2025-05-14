@@ -4,6 +4,7 @@ https://quotes.toscrape.com/
 
 status: done
 file path: "D:\Backend\web scrapping\In Django\markdown"
+filename: "quotestoscrape_with_pagination.py"
 """
 
 # E-Commrace Website built for web-scrapping
@@ -14,14 +15,6 @@ status: done
 file path: "D:\Backend\web scrapping\In Django\e-commrace"
 filename: "e_commrace_selenium_json.py"  # using selenium
 filename: "e-commrace-crawl4ai"  # using crawl4ai
-"""
-
-# Open Food Facts
-"""
-What: Open database of food products from around the world.
-Practice: Pagination, nested data, images, nutrition facts.
-
-https://world.openfoodfacts.org/
 """
 
 # Web Scraper Test Sites
@@ -35,6 +28,29 @@ status: done
 file path: "D:\Backend\web scrapping\In Django\e-commarce
 filename: json_extraction_with_pagination_with_image_star_rating.py
 """
+
+# Books API (Google Books
+"""
+What: Free API for book data; great for practicing API scraping and authentication.
+Practice: API keys, pagination, JSON.
+
+Documentation: https://developers.google.com/books/docs/v1/using
+https://www.googleapis.com/auth/books
+
+status: done
+file path: "D:\Backend\web scrapping\In Django\crawl4ai_google_books"
+filename: "__main__.py"
+"""
+
+
+# Open Food Facts
+"""
+What: Open database of food products from around the world.
+Practice: Pagination, nested data, images, nutrition facts.
+
+https://world.openfoodfacts.org/
+"""
+
 
 # Wikipedia
 """
@@ -54,18 +70,6 @@ Practice: Metadata extraction, file download automation.
 https://catalog.data.gov/dataset
 """
 
-# Books API (Google Books
-"""
-What: Free API for book data; great for practicing API scraping and authentication.
-Practice: API keys, pagination, JSON.
-
-Documentation: https://developers.google.com/books/docs/v1/using
-https://www.googleapis.com/auth/books
-
-status: done
-file path: "D:\Backend\web scrapping\In Django\crawl4ai_google_books"
-filename: "__main__.py"
-"""
 
 # News.ycombinator.com (Hacker News)
 """
