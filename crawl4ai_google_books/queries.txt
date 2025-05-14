@@ -1,0 +1,6 @@
+python
+django
+machine learning
+artificial intelligence
+data science
+react

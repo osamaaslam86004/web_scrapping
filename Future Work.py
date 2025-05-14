@@ -61,6 +61,10 @@ Practice: API keys, pagination, JSON.
 
 Documentation: https://developers.google.com/books/docs/v1/using
 https://www.googleapis.com/auth/books
+
+status: done
+file path: "D:\Backend\web scrapping\In Django\crawl4ai_google_books"
+filename: "__main__.py"
 """
 
 # News.ycombinator.com (Hacker News)
