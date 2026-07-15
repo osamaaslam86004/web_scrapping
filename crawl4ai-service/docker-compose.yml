@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  scraper-backend:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      # Use your Gemini API key (read from your host machine's environment)
+      - GEMINI_API_KEY=${GCP_API_KEY}
+    restart: always
