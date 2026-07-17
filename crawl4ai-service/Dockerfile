@@ -8,7 +8,7 @@ RUN pip install --no-cache-dir fastapi uvicorn google-genai
 WORKDIR /app
 
 # Copy your FastAPI app code into the container
-COPY main.py /app/main.py
+COPY . /app/
 
 # Expose FastAPI's port
 EXPOSE 8000
