@@ -2,6 +2,8 @@ import os
 import json
 from fastapi import HTTPException
 from pydantic import BaseModel
+from google import genai
+from google.genai import types
 from helper.gemini_client import get_gemini_client
 
 # Define what fields the frontend must send us
