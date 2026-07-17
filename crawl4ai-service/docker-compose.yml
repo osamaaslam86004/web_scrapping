@@ -8,4 +8,5 @@ services:
     environment:
       # Use your Gemini API key (read from your host machine's environment)
       - GEMINI_API_KEY=${GCP_API_KEY}
+      - CRAWL4AI_API_TOKEN=${CRAWL4AI_API_TOKEN}
     restart: always
