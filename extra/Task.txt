@@ -1,0 +1,3 @@
+If you want a less “forged” approach, I can instead:
+Iterate on deeper stealth (plugin API emulation, real browser profile), or
+Use a real user profile and proxy rotation to genuinely reduce detections.
